@@ -8,16 +8,36 @@ class VoucherList extends React.Component {
 		// default value
 		this.state = {
 			selected: false,
-			selectedChild: {props:{selectableText:""}}
+			selectedChild: {props:{selectableText:"", options:"",prices:"", priceBeforeDiscount:""}},
+			checkboxInstan: false,
+			price:"1.000",
+			priceBeforeDiscount:"1.100",
+			option:0
 		}
 	}
 
 	callbackChild(child){
-		console.log(child)
 		if(this.state.selected){
 			this.state.selectedChild.setState({selected:false})			
 		}
 		this.setState({selectedChild:child, selected:true})
+	}
+
+	renderSelect(){
+		return(		
+			<select style={{width:"100%", height:"36px", fontSize:"16px"}} onChange={(event,data) => {
+				let value = event.target.value
+				this.setState({
+					option:value,
+					price:this.state.selectedChild.props.prices.split("|")[value],
+					priceBeforeDiscount:this.state.selectedChild.props.priceBeforeDiscount.split("|")[value]
+				})
+			}} value={this.state.option}>
+				{this.state.selectedChild.props.options.split("|").map((item, index) => (
+					<option value={index} key={index}>{item}</option>
+				))}
+			</select>
+		)
 	}
 
 	render() {
@@ -31,6 +51,9 @@ class VoucherList extends React.Component {
 							title="Garena "
 							selectableColor=" -webkit-linear-gradient(top, rgb(197, 159, 250), rgb(82, 39, 138))"
 							selectableText="Nikmati serunya main Mobile MobA favoritmu di mana saja dengan grafis HD dan animasi yang keren. Pilih Hero favoritmu dari kumpulan Hero unik dan mainkan dengan kontrol yang responsif. Mobile Arena adalah multiplayer 5v5 action game battle arena, yang dibuat dengan sangat memperhatikan fairness dan balance, sehingga kemenangan hanya dapat diraih dengan skill dari seorang gamer sejati."
+							options					="33 Shell|66 Shell|165 Shell|330 Shell|1.000 Cash|2.000 Cash|5.000 Cash|10.000 Cash"
+							prices 					="10.000|20.000|21.000|48.000|95.000|10.000|20.000|48.000|95.000"
+							priceBeforeDiscount		="10.500|21.000|50.500|100.000|21.000|50.500|100.0000"
 							callback={this.callbackChild.bind(this)}
 						/>
 						<VoucherButton 
@@ -38,46 +61,46 @@ class VoucherList extends React.Component {
 							title="Steam"
 							selectableColor=" -webkit-linear-gradient(top, rgb(19, 130, 179), rgb(20, 73, 124))"
 							selectableText="Steam Wallet yang digunakan untuk top up game-game di Steam ataupun membeli game terbaru dari Steam. Adapun game-game top dari Steam adalah : DotA2, Counter Strike : Global Offensive, PlayerUnknown's BattleGround, Team Fortress, GTA V, dan masi banyak lagi."
+							options="66 Shuls|165 Shoptiuls"
+							options="331 Shell|661 Shell|1651 Shell|3301 Shell|1.000 Cash|2.000 Cash|5.000 Cash|10.000 Cash"
+							prices="10.000|20.000|21.000|48.000|95.000|10.000|20.000|48.000|95.000"
+							priceBeforeDiscount="10.500|21.000|50.500|100.000|21.000|50.500|100.0000"
 							callback={this.callbackChild.bind(this)}
 						/>
 					</Row>
 					<Row style={outerSelectedBox}>
 
-			    		<Col sm={12} style={{padding:"0"}}>
+			    		<Col sm={12} style={{padding:"0", lineHeight:"17.1px"}}>
 			    			<div style={{overflow:"hidden", "position":"relative", "width":"100%"}}>
-							    <div style={{width:"50%",float:"right"}}>
+							    <div style={{width:"50%",float:"right",}}>
 							    	<div style={{padding:"10px"}}>
-							    		<div>{this.state.selectedChild.props.selectableText}</div>
-							    		<div style={{clear:"both"}}>
-							    			Nominal <br />
-							    			<select style={{width:"100%"}}>
-							    				<option class="product-li none" value="" disabled="" id="product_empty_nominal" selected="">Pilih Produk</option>
-							    				<option class="product-li" value="1109" selected="selected">33 Shell</option>
-							    				<option class="product-li" value="1108">66 Shell</option>
-							    				<option class="product-li" value="1107">165 Shell</option>
-							    				<option class="product-li" value="1106">330 Shell</option>
-							    				<option class="product-li" value="1105">1.000 Cash</option>
-							    				<option class="product-li" value="1104">2.000 Cash</option>
-							    				<option class="product-li" value="1103">5.000 Cash</option>
-							    				<option class="product-li" value="1102">10.000 Cash</option>
-							    			</select>
+							    		<div style={{fontSize:"12px"}}>
+							    			{this.state.selectedChild.props.selectableText}
 							    		</div>
-								    	<div style={{clear:"both", width:"100%"}}>
+							    		<div style={{clear:"both", paddingTop:"18px"}}>
+							    			<span style={{color:"#888", fontSize:"13px"}}>Nominal</span> <br />
+							    			{this.renderSelect()}
+							    		</div>
+								    	<div style={{clear:"both", width:"100%", paddingTop:"18px"	}}>
 								    		<div style={{width:"50%", float:"left" }}>
-								    			Harga <br />
-								    			Rp 8000 <strike>not yet available!</strike>
+								    			<span style={{color:"#888", fontSize:"13px"}}>Harga</span> <br />
+								    			<span style={{color:"red", fontSize:"20px", fontWeight:"bold"}}>Rp {this.state.price}</span> <strike>Rp {this.state.priceBeforeDiscount}!</strike>
+								    			<br />
+								    			<br />
+								    			<br />
 								    		</div>
 								    		<div style={{width:"50%", float:"right" }}> 
-								    			<input type="checkbox" name="vehicle" value="Bike" />
+								    			<input type="checkbox" checked={this.state.checkboxInstan} onChange={() => {this.setState({checkboxInstan:!this.state.checkboxInstan})}}/>
 								    			Bayar Instan <br/>
-								    			<button>Beli</button> 
+								    			<button style={{backgroundColor:"#ff5722",color:"white", width:"100%", border: 0, fontSize: "16px", borderRadius:"2px", padding:"10px"}}>{this.state.checkboxInstan?"Bayar":"Beli"}</button> 
 								    		</div>
 							    		</div>
 								    </div>
 							    </div>
 							    <div style={{height:"100%",position:"absolute",top:"0",right:"50%",width:"50%"}}>
-							    	<div style={{left:"-10%", position:"absolute", width:"100%", height:"100%",backgroundImage:this.state.selectedChild.props.selectableColor, transform:" skew(-20deg,0)"}}>&nbsp;</div>
-							    	<div style={{paddingTop:"10%", color:"white", fontSize:"16px",position:"absolute",width:"100%", height:"100%",textAlign:"center"}}>
+							    	<div style={{left:"-15%", position:"absolute", width:"100%", height:"100%",backgroundImage:this.state.selectedChild.props.selectableColor, transform:" skew(-20deg,0)"}}>&nbsp;</div>
+							    	<div style={{paddingTop:"0%", color:"white", fontSize:"16px",position:"absolute",width:"100%", height:"100%",textAlign:"center"}}>
+							    		<img src={this.state.selectedChild.props.image} /> <br/>
 							    		{this.state.selectedChild.props.title}
 							    	</div>
 							    </div>
@@ -104,7 +127,7 @@ let heightSimilar = {
 let outerSelectedBox = {
 	overflow : "hidden",
 	border : "solid 1px #42b549",
-	marginTop : "20",
+	marginTop : "20px",
 	marginLeft : "0",
 	paddingLeft : "0",
 	paddingRight : "0",
