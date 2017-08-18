@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { HELLO_WORLD } from './../actions'
-import Hello from './../components/Hello'
+import VoucherList from './../components/VoucherList'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -19,6 +19,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const HelloWorld = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Hello)
+)(VoucherList)
 
 export default HelloWorld
