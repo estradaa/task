@@ -20,7 +20,12 @@
 		}
 		render() {
 		return (
-			<Col sm={2} onClick={() => {this.setState({selected: !this.state.selected})}}>
+			<Col sm={2} onClick={() => {
+					if(!this.state.selected){
+						this.props.callback(this)
+						this.setState({selected: !this.state.selected})
+					}
+			}}>
 				<div style={this.getStyle()}>
 					<img style={imgCss} src={this.props.image} />
 					<center>
@@ -34,9 +39,7 @@
 
 	let css = {
 		backgroundColor : '#f4f4f4',
-		borderColor : '#c6c6c6',
-		border : '1px',
-		borderStyle : 'solid',
+		border : '1px solid #c6c6c6',
 		borderRadius : '5px',
 		paddingTop: '20%',
 		paddingBottom: '20%',
@@ -46,10 +49,8 @@
 
 	let cssSelected = {
 		color : '#515151',
+		border : '1px solid rgb(66, 181, 73)',
 		backgroundColor : 'white',
-		borderColor : 'rgb(66, 181, 73)',
-		border : '1px',
-		borderStyle : 'solid',
 		borderRadius : '5px',
 		paddingTop: '20%',
 		paddingBottom: '20%',
