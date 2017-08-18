@@ -20,7 +20,12 @@ class VoucherList extends React.Component {
 		if(this.state.selected){
 			this.state.selectedChild.setState({selected:false})			
 		}
-		this.setState({selectedChild:child, selected:true})
+		this.setState({
+			selectedChild:child, 
+			selected:true,
+			price:child.props.prices.split("|")[0],
+			priceBeforeDiscount:child.props.priceBeforeDiscount.split("|")[0]
+		})
 	}
 
 	renderSelect(){
@@ -58,18 +63,16 @@ class VoucherList extends React.Component {
 						/>
 						<VoucherButton 
 							image="https://ecs7.tokopedia.net/img/recharge/operator/steam_249px_123px.png" 
-							title="Steam"
+							title="Steam Wallet"
 							selectableColor=" -webkit-linear-gradient(top, rgb(19, 130, 179), rgb(20, 73, 124))"
 							selectableText="Steam Wallet yang digunakan untuk top up game-game di Steam ataupun membeli game terbaru dari Steam. Adapun game-game top dari Steam adalah : DotA2, Counter Strike : Global Offensive, PlayerUnknown's BattleGround, Team Fortress, GTA V, dan masi banyak lagi."
-							options="66 Shuls|165 Shoptiuls"
-							options="331 Shell|661 Shell|1651 Shell|3301 Shell|1.000 Cash|2.000 Cash|5.000 Cash|10.000 Cash"
-							prices="10.000|20.000|21.000|48.000|95.000|10.000|20.000|48.000|95.000"
-							priceBeforeDiscount="10.500|21.000|50.500|100.000|21.000|50.500|100.0000"
+							options="6.000|12.000|45.000|60.000|90.000|120.000|250.000|400.000|600.000"
+							prices="8.000|16.000|54.000|72.000|108.000|144.000|300.000|481.000|721.000"
+							priceBeforeDiscount="8.500|18.000|57.000|76.000|113.500|151.500|315.000|505.500|757.500"
 							callback={this.callbackChild.bind(this)}
 						/>
 					</Row>
-					<Row style={outerSelectedBox}>
-
+					<Row style={{overflow : "hidden", border : "solid 1px #42b549", marginTop : "20px", marginLeft : "0", paddingLeft : "0", paddingRight : "0", marginRight : "0", color : "#515151",borderRadius : '5px',}}>
 			    		<Col sm={12} style={{padding:"0", lineHeight:"17.1px"}}>
 			    			<div style={{overflow:"hidden", "position":"relative", "width":"100%"}}>
 							    <div style={{width:"50%",float:"right",}}>
@@ -125,15 +128,7 @@ let heightSimilar = {
 }
 
 let outerSelectedBox = {
-	overflow : "hidden",
-	border : "solid 1px #42b549",
-	marginTop : "20px",
-	marginLeft : "0",
-	paddingLeft : "0",
-	paddingRight : "0",
-	marginRight : "0",
-	color : "#515151",
-	borderRadius : '5px',
+	overflow : "hidden", border : "solid 1px #42b549", marginTop : "20px", marginLeft : "0", paddingLeft : "0", paddingRight : "0", marginRight : "0", color : "#515151",borderRadius : '5px',
 }
 
 let selectedImg = {
