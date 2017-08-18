@@ -72,7 +72,7 @@ class VoucherList extends React.Component {
 							callback={this.callbackChild.bind(this)}
 						/>
 					</Row>
-					<Row style={{overflow : "hidden", border : "solid 1px #42b549", marginTop : "20px", marginLeft : "0", paddingLeft : "0", paddingRight : "0", marginRight : "0", color : "#515151",borderRadius : '5px',}}>
+					<Row style={{overflow : "hidden", border : "solid 1px #42b549", marginTop : "20px", marginLeft : "0", paddingLeft : "0", paddingRight : "0", marginRight : "0", color : "#515151",borderRadius : '5px', display: this.state.selected ?'block':'none'}}>
 			    		<Col sm={12} style={{padding:"0", lineHeight:"17.1px"}}>
 			    			<div style={{overflow:"hidden", "position":"relative", "width":"100%"}}>
 							    <div style={{width:"50%",float:"right",}}>
