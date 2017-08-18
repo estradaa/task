@@ -43,19 +43,46 @@ class VoucherList extends React.Component {
 					</Row>
 					<Row style={outerSelectedBox}>
 
-			    		<Col sm={6} style={heightSimilar}>
-			    			hadsfg
-			    		</Col>
-
-						<Col sm={6}>
-
-							<div  style={{display: "inline", position:"absolut", backgroundImage : this.state.selectedChild.props.selectableColor}}>
-								<div>
-									{this.state.selectedChild.props.selectableText}
-								</div>
-								<div><button onClick={() => {alert('Buy button not implemented')}}>Beli</button></div>
+			    		<Col sm={12} style={{padding:"0"}}>
+			    			<div style={{overflow:"hidden", "position":"relative", "width":"100%"}}>
+							    <div style={{width:"50%",float:"right"}}>
+							    	<div style={{padding:"10px"}}>
+							    		<div>{this.state.selectedChild.props.selectableText}</div>
+							    		<div style={{clear:"both"}}>
+							    			Nominal <br />
+							    			<select style={{width:"100%"}}>
+							    				<option class="product-li none" value="" disabled="" id="product_empty_nominal" selected="">Pilih Produk</option>
+							    				<option class="product-li" value="1109" selected="selected">33 Shell</option>
+							    				<option class="product-li" value="1108">66 Shell</option>
+							    				<option class="product-li" value="1107">165 Shell</option>
+							    				<option class="product-li" value="1106">330 Shell</option>
+							    				<option class="product-li" value="1105">1.000 Cash</option>
+							    				<option class="product-li" value="1104">2.000 Cash</option>
+							    				<option class="product-li" value="1103">5.000 Cash</option>
+							    				<option class="product-li" value="1102">10.000 Cash</option>
+							    			</select>
+							    		</div>
+								    	<div style={{clear:"both", width:"100%"}}>
+								    		<div style={{width:"50%", float:"left" }}>
+								    			Harga <br />
+								    			Rp 8000 <strike>not yet available!</strike>
+								    		</div>
+								    		<div style={{width:"50%", float:"right" }}> 
+								    			<input type="checkbox" name="vehicle" value="Bike" />
+								    			Bayar Instan <br/>
+								    			<button>Beli</button> 
+								    		</div>
+							    		</div>
+								    </div>
+							    </div>
+							    <div style={{height:"100%",position:"absolute",top:"0",right:"50%",width:"50%"}}>
+							    	<div style={{left:"-10%", position:"absolute", width:"100%", height:"100%",backgroundImage:this.state.selectedChild.props.selectableColor, transform:" skew(-20deg,0)"}}>&nbsp;</div>
+							    	<div style={{paddingTop:"10%", color:"white", fontSize:"16px",position:"absolute",width:"100%", height:"100%",textAlign:"center"}}>
+							    		{this.state.selectedChild.props.title}
+							    	</div>
+							    </div>
 							</div>
-						</Col>
+			    		</Col>
 
 					</Row>
 				</Container>
@@ -76,21 +103,14 @@ let heightSimilar = {
 
 let outerSelectedBox = {
 	overflow : "hidden",
-	padding : "-30px",
 	border : "solid 1px #42b549",
-	paddingTop : "20",
-	paddingBottom : "20",
 	marginTop : "20",
 	marginLeft : "0",
+	paddingLeft : "0",
+	paddingRight : "0",
 	marginRight : "0",
 	color : "#515151",
 	borderRadius : '5px',
-}
-
-let outerSelectedBox2 = {
-	overflow: "hidden",
-    position: "relative",
-    width: "100%"
 }
 
 let selectedImg = {
@@ -103,14 +123,9 @@ let selectedImg = {
 let css = {
 	fontFamily : 'open sans,sans-serif',
 	fontSize : '12px',
+	boxSizing: "border-box"
 }
 
-let selectedBox = {
-	paddingTop:'100%',
-	marginLeft:"-10%",
-	transform : "matrix(1, 0, -0.36397, 1, -30, 0)",
-	backgroundImage : " -webkit-linear-gradient(top, rgb(197, 159, 250), rgb(82, 39, 138))",
-}
 
 VoucherList.propTypes = {
   onClick: PropTypes.func.isRequired,
